@@ -1,0 +1,30 @@
+PACKAGES NEEDED
+
+1) Scalar.AspNetCore
+2) dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+3) dotnet add package Microsoft.EntityFrameworkCore.Design
+5) dotnet add package Microsoft.EntityFrameworkCore.Tools
+4) dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+
+
+TOOLS NEEDED
+1) dotnet tool install --global dotnet-ef
+2) dotnet tool install -g dotnet-aspnet-codegenerator
+
+
+PROCESS
+
+-install need tools and PACKAGES
+-create models controllers data and configurations
+-create dbcontext and add the entities
+-setup connection strings (appsettings.json) and server for db
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ECommerceDb;Trusted_Connection=True;MultipleActiveResultSets=true,MultipleActiveResultSets=true"
+  }
+-build service for the dbcontext (register in Program.cs)
+
+builder.Services.AddDbContext<YourDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+add migrations and update database
