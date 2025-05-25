@@ -12,6 +12,7 @@ namespace EFCore.Data
         : DbContext(options)
     {
         public DbSet<Invoice> Invoices => Set<Invoice>();
+        public DbSet<InvoiceItem> InvoiceItems => Set<InvoiceItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

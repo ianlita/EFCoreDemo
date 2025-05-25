@@ -69,6 +69,7 @@ namespace EFCore.Controllers
                         .OrderByDescending(x => x.InvoiceDate)
                         .Skip((page - 1) * pageSize)
                         .Take(pageSize)
+                        .Include(i => i.InvoiceItems) // Include related InvoiceItems
                         .ToListAsync();
         }
 

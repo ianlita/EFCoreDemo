@@ -28,3 +28,7 @@ builder.Services.AddDbContext<YourDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 add migrations and update database
+
+//SAMPLE CODEGENERATOR
+dotnet-aspnet-codegenerator controller -name MoviesController -api -outDir Controllers --model Movie --dataContext SampleDbContext -async -actions
+dotnet-aspnet-codegenerator controller -name ActorsController -api -outDir Controllers --model Actor --dataContext SampleDbContext -async -actions

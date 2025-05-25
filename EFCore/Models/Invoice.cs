@@ -15,5 +15,8 @@ namespace EFCore.Models
         public DateTimeOffset InvoiceDate { get; set; }
         public DateTimeOffset DueDate { get; set; }
         public InvoiceStatus Status { get; set; }
+
+        public ICollection<InvoiceItem> InvoiceItems { get; set; } = new List<InvoiceItem>();
+
     }
 }

@@ -4,6 +4,7 @@ using EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(InvoiceDbContext))]
-    partial class InvoiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525101459_AddInvoiceItemAndConfiguration")]
+    partial class AddInvoiceItemAndConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +118,7 @@ namespace EFCore.Migrations
             modelBuilder.Entity("EFCore.Models.InvoiceItem", b =>
                 {
                     b.HasOne("EFCore.Models.Invoice", "Invoice")
-                        .WithMany("InvoiceItems")
+                        .WithMany("Items")
                         .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -125,7 +128,7 @@ namespace EFCore.Migrations
 
             modelBuilder.Entity("EFCore.Models.Invoice", b =>
                 {
-                    b.Navigation("InvoiceItems");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
