@@ -20,7 +20,7 @@ PROCESS
 -setup connection strings (appsettings.json) and server for db
 
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ECommerceDb;Trusted_Connection=True;MultipleActiveResultSets=true,MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=(SampleLocalDb)\\samplelocaldb;Database=SampleDb;Trusted_Connection=True;MultipleActiveResultSets=true,MultipleActiveResultSets=true"
   }
 -build service for the dbcontext (register in Program.cs)
 

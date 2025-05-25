@@ -272,3 +272,4 @@ C:\Users\chris\source\repos\EFCoreDemo\EFCore\bin\Debug\net9.0\ru\Microsoft.Code
 C:\Users\chris\source\repos\EFCoreDemo\EFCore\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\chris\source\repos\EFCoreDemo\EFCore\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\chris\source\repos\EFCoreDemo\EFCore\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Users\chris\source\repos\EFCoreDemo\EFCore\obj\Debug\net9.0\EFCore.sourcelink.json

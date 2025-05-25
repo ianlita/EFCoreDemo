@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EFCore.Data;
 using EFCore.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EFCore.Controllers
 {
@@ -20,18 +21,65 @@ namespace EFCore.Controllers
         {
             _context = context;
         }
+        #region "GetInvoices"
 
+        // The following code snippet shows how to retrieve all invoices from the database.
         // GET: api/Invoices
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
+        // {
+        //     if (_context.Invoices == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     return await _context.Invoices.ToListAsync();
+        // }
+        // The following code snippet shows how to retrieve all invoices from the database.
+        // GET: api/Invoices
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
+        // {
+        //     if (_context.Invoices == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     return await _context.Invoices.ToListAsync();
+        // }
+
+        //The following code snippet shows how to retrieve all invoices from the database with a specific status.
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices(InvoiceStatus? status)
+        //{
+        //    // Omitted for brevity 
+        //    return await _context.Invoices.Where(x => status == null || x.Status == status).ToListAsync();
+        //}
+#endregion
+
+        // The following code snippet shows how to retrieve pages of invoices from the database.s
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices()
+        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoices(int page = 1, int pageSize = 10, InvoiceStatus? status = null)
         {
-            return await _context.Invoices.ToListAsync();
+            if (_context.Invoices == null)
+            {
+                return NotFound();
+            }
+            // The AsQueryable() method is not required, as the DbSet<TEntity> class implements the IQueryable<TEntity> interface.
+            return await _context.Invoices.AsQueryable().Where(x => status == null || x.Status == status)
+                        .OrderByDescending(x => x.InvoiceDate)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToListAsync();
         }
 
         // GET: api/Invoices/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Invoice>> GetInvoice(Guid id)
         {
+            if (_context.Invoices == null)
+            {
+                return NotFound();
+            }
             var invoice = await _context.Invoices.FindAsync(id);
 
             if (invoice == null)
@@ -40,20 +88,6 @@ namespace EFCore.Controllers
             }
 
             return invoice;
-        }
-        [HttpGet("status/{status}")]
-        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoicesByStatus(InvoiceStatus status)
-        {
-            var invoices = await _context.Invoices
-                .Where(i => i.Status == status)
-                .ToListAsync();
-
-            if (invoices == null || !invoices.Any())
-            {
-                return NotFound();
-            }
-
-            return invoices;
         }
 
         // PUT: api/Invoices/5
@@ -66,10 +100,25 @@ namespace EFCore.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(invoice).State = EntityState.Modified;
+            //_context.Entry(invoice).State = EntityState.Modified;
 
             try
             {
+                var invoiceToUpdate = await _context.Invoices.FindAsync(id);
+                if (invoiceToUpdate == null)
+                {
+                    return NotFound();
+                }
+                // invoiceToUpdate.InvoiceNumber = invoice.InvoiceNumber;
+                // invoiceToUpdate.ContactName = invoice.ContactName;
+                // invoiceToUpdate.Description = invoice.Description;
+                // invoiceToUpdate.Amount = invoice.Amount;
+                // invoiceToUpdate.InvoiceDate = invoice.InvoiceDate;
+                // invoiceToUpdate.DueDate = invoice.DueDate;
+                // invoiceToUpdate.Status = invoice.Status;
+
+                // Update only the properties that have changed
+                _context.Entry(invoiceToUpdate).CurrentValues.SetValues(invoice);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
