@@ -53,7 +53,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
 
                     b.HasData(
                         new

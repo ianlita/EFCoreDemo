@@ -95,7 +95,7 @@ namespace EFCore.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInvoice(Guid id, Invoice invoice)
         {
-            if (id != invoice.InvoiceId)
+            if (id != invoice.Id)
             {
                 return BadRequest();
             }
@@ -144,7 +144,7 @@ namespace EFCore.Controllers
             _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInvoice", new { id = invoice.InvoiceId }, invoice);
+            return CreatedAtAction("GetInvoice", new { id = invoice.Id }, invoice);
         }
 
         // DELETE: api/Invoices/5
@@ -165,7 +165,7 @@ namespace EFCore.Controllers
 
         private bool InvoiceExists(Guid id)
         {
-            return _context.Invoices.Any(e => e.InvoiceId == id);
+            return _context.Invoices.Any(e => e.Id == id);
         }
     }
 }

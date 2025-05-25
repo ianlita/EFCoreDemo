@@ -13,8 +13,8 @@ namespace EFCore.Data.Configurations
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
             builder.ToTable("Invoices");
-            builder.HasKey(i => i.InvoiceId);
-            builder.Property(p => p.InvoiceId).HasColumnName("Id");
+            builder.HasKey(i => i.Id);
+            builder.Property(p => p.Id).HasColumnName("InvoiceId");
             builder.Property(p => p.InvoiceNumber).HasColumnName("InvoiceNumber").HasColumnType("varchar(32)").IsRequired();
             builder.Property(p => p.ContactName).HasColumnName("ContactName").HasMaxLength(32).IsRequired();
             builder.Property(p => p.Description).HasColumnName("Description").HasMaxLength(256);

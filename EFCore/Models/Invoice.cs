@@ -7,7 +7,7 @@ namespace EFCore.Models
 {
     public class Invoice
     {
-        public Guid InvoiceId { get; set; }
+        public Guid Id { get; set; }
         public string InvoiceNumber { get; set; } = string.Empty;
         public string ContactName { get; set; } = string.Empty;
         public string? Description { get; set; }
